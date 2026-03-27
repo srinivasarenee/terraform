@@ -1,17 +1,17 @@
 resource "aws_instance" "terraform_app_server" {
-  ami           = "ami-0220d79f3f480ecf5"
-  instance_type = "t3.micro"
+  ami                    = "ami-0220d79f3f480ecf5"
+  instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   tags = {
-    Name = "Terraform"
-    Project="DevOpsPractice"
+    Name    = "Terraform"
+    Project = "DevOpsPractice"
   }
 }
 
 resource "aws_security_group" "allow_tls" {
   name        = "allow-all-terraform"
   description = "Allow TLS inbound traffic and all outbound traffic"
-  
+
 
   egress {
     from_port        = 0
