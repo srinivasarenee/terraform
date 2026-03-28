@@ -1,5 +1,5 @@
 resource "aws_instance" "terraform_app_server" {
-  count         = 2
+  count         = length(var.instances)
   ami           = var.ami_id
   instance_type = var.instance-type
   //instance_type          = var.environment == "dev" ? "t3.micro" : "t3.small"
