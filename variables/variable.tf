@@ -14,7 +14,8 @@ variable "tags" {
   type        = map(any)
   default = {
 
-    Name        = "VariableDemo"
+    Name = "VariableDemo"
+
     Project     = "Roboshop"
     Terraform   = "true"
     Environment = "Dev"
@@ -23,7 +24,7 @@ variable "tags" {
 
 variable "sg_name" {
   description = "seucrity group name"
-  default     = "allow-all-terraform"
+  default     = "allow-all-terraform-default"
   type        = string
 
 }
@@ -62,5 +63,30 @@ variable "sg-tags" {
     Terraform   = "true"
     Environment = "Dev"
   }
+
+}
+variable "environment" {
+  description = "Environmemnt"
+  type        = string
+  default     = "dev"
+
+}
+variable "instances" {
+  description = "The list of servers"
+  type        = list(any)
+  //default = ["mongodb","redis","mysql","payment","frontend"]
+  default = ["mongodb", "frontend"]
+
+}
+
+variable "listFruits" {
+  type    = list(string)
+  default = ["apple", "banana", "apple", "pomegranate"]
+
+}
+
+variable "setFruits" {
+  type    = set(string)
+  default = ["apple", "banana", "apple", "pomegranate"]
 
 }

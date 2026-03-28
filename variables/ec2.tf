@@ -1,8 +1,18 @@
 resource "aws_instance" "terraform_app_server" {
-  ami                    = var.ami_id
-  instance_type          = var.instance-type
+  count         = 2
+  ami           = var.ami_id
+  instance_type = var.instance-type
+  //instance_type          = var.environment == "dev" ? "t3.micro" : "t3.small"
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
-  tags                   = var.tags
+  //tags                   = var.tags
+  tags = {
+
+    //Name        = "VariableDemo"
+    Name        = var.instances[count.index]
+    Project     = "Roboshop"
+    Terraform   = "true"
+    Environment = "Dev"
+  }
 }
 
 resource "aws_security_group" "allow_tls" {
