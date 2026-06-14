@@ -19,6 +19,11 @@ security_group_name="security_group_dev"
 #terraform apply -var-file="test.tfvars"
 #terraform apply -var-file="prod.tfvars"
 
+#$ export TF_VAR_environment="prod"
+
+#SRINIVAS RAO@LAPTOP-RI1VM8GT MINGW64 /d/devops/repos/terraform/04-config (main)
+#$ terraform plan -var-file="$TF_VAR_environment.tfvars"
+
 
 
 
