@@ -6,8 +6,17 @@ terraform {
     }
   }
 
-  backend "s3" {
+  # backend "s3" {
+  #
+  # }
 
+  cloud {
+    organization = "srinidevops"
+
+
+    workspaces {
+      tags = ["dev", "test"]
+    }
   }
 }
 
