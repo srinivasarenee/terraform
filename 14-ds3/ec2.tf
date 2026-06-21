@@ -1,0 +1,36 @@
+resource "aws_instance" "terraform_app_server" {
+  ami                    = "ami-0220d79f3f480ecf5"
+  instance_type          = "t3.micro"
+  vpc_security_group_ids = [aws_security_group.allow_tls.id]
+  tags = {
+    Name = "Terraform-${var.environment}"
+    # Project = "${local.identifier}"
+    Project     = var.project
+    Environment = var.environment
+    WorkSpace   = terraform.workspace
+  }
+}
+
+resource "aws_security_group" "allow_tls" {
+  name        = "allow-all-terraform-${var.environment}"
+  description = "Allow TLS inbound traffic and all outbound traffic"
+
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+  ingress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+  tags = {
+    Name = "allow-all-terraform-${var.environment}"
+  }
+}
